@@ -1,0 +1,24 @@
+{
+  "name": "city-explorer-backend",
+  "version": "1.0.0",
+  "description": "server for city explorer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamallM1/city-explorer-backend.git"
+  },
+  "author": "Jamall Malik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamallM1/city-explorer-backend/issues"
+  },
+  "homepage": "https://github.com/JamallM1/city-explorer-backend#readme",
+  "dependencies": {
+    "env": "^0.0.2",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
