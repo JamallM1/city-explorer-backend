@@ -4,12 +4,12 @@
 console.log('first server');
 
 require('dotenv').config();
-const weatherData = require('./weather.json');
+//const weatherData = require('./weather.json');
 const express = require('express');
 const app = express();
 // const axios = require('axios');
-// const getWeather = require('./data/weather');
-
+const getWeather = require('./weather');
+const getMovies = require('./movies');
 const cors = require('cors');
 // const { response } = require('express');
 
@@ -23,24 +23,23 @@ app.get('/', (req, res) => {
   return res.send('Welcome to our server');
 });
 
-app.get('/weather', (request, response) => {
+app.get('/weather', async(request, response) => {
   console.log('hitting weather route');
   let searchQueryCity = request.query.searchQueryCity;
-  let cityWeather = weatherData.find((e) => e.city_name.toLowerCase() === searchQueryCity.toLowerCase());
-  let selectedCity = cityWeather.data.map(dailyWeather => {
-    return new Forecast(dailyWeather);
-  });
+  //let cityWeather = weatherData.find((e) => e.city_name.toLowerCase() === searchQueryCity.toLowerCase());
+  let weatherData = await getWeather(searchQueryCity);
+  response.send(weatherData);
 
-  return response.send(selectedCity);
+});
+app.get('/movies', async(request, response) => {
+  console.log('hitting movie route');
+  let searchQueryCity = request.query.searchQueryCity;
+  //let cityWeather = weatherData.find((e) => e.city_name.toLowerCase() === searchQueryCity.toLowerCase());
+  let movieData = await getMovies(searchQueryCity);
+  response.send(movieData);
 
 });
 
-class Forecast {
-  constructor(cityWeather) {
-    this.date = cityWeather.datetime;
-    this.description = cityWeather.weather.description;
-  }
-}
 
 app.get('*', (req, res) => {
   console.log('hitting all route');
